@@ -1,4 +1,4 @@
 package com.example.horoscopo.data
 
-class Horoscope  {
+class Horoscope (val id: String, val name: Int, val date: Int, val image: Int ) {
 }
