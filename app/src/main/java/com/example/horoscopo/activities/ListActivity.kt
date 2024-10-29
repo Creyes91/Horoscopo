@@ -1,11 +1,12 @@
-package com.example.horoscopo
+package com.example.horoscopo.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.horoscopo.R
 
-class MainActivity : AppCompatActivity() {
+class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_list)
     }
 }
