@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center">
 
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        android:layout_margin="20dp"        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="15dp"
+            android:layout_gravity="center">
     <ImageView
+        android:id="@+id/iconIV"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:src="@drawable/capricornus_icon">
@@ -13,6 +29,7 @@
     </ImageView>
 
     <TextView
+        android:id="@+id/nameTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -21,14 +38,17 @@
     </TextView>
 
     <TextView
+        android:id="@+id/dateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:
-        android:text="@string/horoscope_date_capricorn">
+        android:text="@string/horoscope_date_capricorn"
+        android:textAlignment="center">
 
 
     </TextView>
 
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
 
