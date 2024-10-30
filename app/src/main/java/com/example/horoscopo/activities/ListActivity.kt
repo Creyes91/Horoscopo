@@ -1,5 +1,6 @@
 package com.example.horoscopo.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,7 +22,12 @@ class ListActivity : AppCompatActivity() {
         recyclerView=findViewById(R.id.rvMain) // creacion de RV
 
         horoscopeList=HoroscopeProvider.findAll() //creacion asignacion de lista
-        val adapter = HoroscopeAdapter(horoscopeList) //creacion de adapter pasando la lista
+        val adapter = HoroscopeAdapter(horoscopeList) { position ->
+            //aqui poner que hace cuaando detecta un click
+            val horoscope = horoscopeList[position]
+            navigateToDetail(horoscope)
+
+        } //creacion de adapter pasando la lista
         recyclerView.adapter=adapter //asignacion del adapter creado en la activity al adapter de RV
         recyclerView.layoutManager= LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false) // manejo del RV en vertical
 
@@ -31,5 +37,12 @@ class ListActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun navigateToDetail(horoscope: Horoscope)
+    {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("horoscopo:id", horoscope.id) //envia informacion al activity destino con putExtra de la clase intent
+        startActivity(intent)
     }
 }

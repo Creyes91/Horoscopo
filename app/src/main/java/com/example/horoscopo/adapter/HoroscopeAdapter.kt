@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo.R
 import com.example.horoscopo.data.Horoscope
 
-class HoroscopeAdapter(val items: List<Horoscope>) : RecyclerView.Adapter<HoroscopeViewHolder>()
+class HoroscopeAdapter(val items: List<Horoscope>, val onItemClick:(Int) -> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>()
 {
     //private var onClickListener= OnClickListener? = null
 
@@ -28,6 +28,8 @@ class HoroscopeAdapter(val items: List<Horoscope>) : RecyclerView.Adapter<Horosc
     override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
         val horoscope= items[position]
         holder.render(horoscope)
+        holder.itemView.setOnClickListener {onItemClick(position)  }
+
 
     }
 
