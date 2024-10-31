@@ -3,7 +3,7 @@ package com.example.horoscopo.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo.R
@@ -28,8 +28,10 @@ class ListActivity : AppCompatActivity() {
             navigateToDetail(horoscope)
 
         } //creacion de adapter pasando la lista
+
         recyclerView.adapter=adapter //asignacion del adapter creado en la activity al adapter de RV
         recyclerView.layoutManager= LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false) // manejo del RV en vertical
+
 
        // recyclerView.layoutManager= GridLayoutManager(this,2) //RV en columnas
 
@@ -39,10 +41,13 @@ class ListActivity : AppCompatActivity() {
 
     }
 
+
+
+
     private fun navigateToDetail(horoscope: Horoscope)
     {
         val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra("horoscopo:id", horoscope.id) //envia informacion al activity destino con putExtra de la clase intent
+        intent.putExtra("horoscope_id", horoscope.id) //envia informacion al activity destino con putExtra de la clase intent
         startActivity(intent)
     }
 }

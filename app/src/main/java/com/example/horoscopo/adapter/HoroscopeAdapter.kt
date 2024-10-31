@@ -5,14 +5,16 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo.R
 import com.example.horoscopo.data.Horoscope
 
 class HoroscopeAdapter(val items: List<Horoscope>, val onItemClick:(Int) -> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>()
 {
-    //private var onClickListener= OnClickListener? = null
 
 
 
@@ -28,7 +30,13 @@ class HoroscopeAdapter(val items: List<Horoscope>, val onItemClick:(Int) -> Unit
     override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
         val horoscope= items[position]
         holder.render(horoscope)
-        holder.itemView.setOnClickListener {onItemClick(position)  }
+        holder.itemView.setOnClickListener{
+            onItemClick(position)
+
+
+       /* val v = if (holder.detailTxt.visibility== View.GONE) View.VISIBLE else View.GONE
+        holder.detailTxt.visibility=v*/
+        }
 
 
     }
@@ -42,6 +50,12 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
     var datesTextView: TextView = view.findViewById(R.id.dateTV)
     var symbolImageView: ImageView = view.findViewById(R.id.iconIV)
 
+    //prueba expandir cardview
+    /*var detailTxt: TextView = view.findViewById(R.id.detailTxt)
+    var expandable: CardView= view.findViewById(R.id.expandableCV)
+
+    var layout: LinearLayout= view.findViewById(R.id.layout)*/
+
     fun render(horoscope: Horoscope) {
         //val context = itemView.context
         //nameTextView.text = context.getString(horoscope.name)
@@ -50,6 +64,7 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
         nameTextView.setText(horoscope.name)
         datesTextView.setText(horoscope.date)
         symbolImageView.setImageResource(horoscope.image)
+       // detailTxt.setText("prueba")
 
     }
 

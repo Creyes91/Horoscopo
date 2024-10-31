@@ -8,19 +8,24 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/expandableCV"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"
-        android:layout_margin="20dp"        >
+        android:layout_margin="20dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
             android:padding="15dp"
-            android:layout_gravity="center">
-    <ImageView
+            android:layout_gravity="center"
+            android:animateLayoutChanges="true">
+
+
+            <ImageView
         android:id="@+id/iconIV"
         android:layout_width="96dp"
         android:layout_height="96dp"
@@ -33,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
         android:text="@string/horoscopo_name_capricorn">
 
     </TextView>
@@ -44,6 +51,16 @@
         android:text="@string/horoscope_date_capricorn"
         android:textAlignment="center">
 
+    </TextView>
+
+    <TextView
+        android:id="@+id/detailTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textAlignment="inherit"
+        android:text="prueba"
+        android:textSize="13dp">
 
     </TextView>
 

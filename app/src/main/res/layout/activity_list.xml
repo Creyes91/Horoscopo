@@ -8,6 +8,13 @@
     tools:context=".activities.ListActivity"
     >
 
+   <androidx.appcompat.widget.Toolbar
+       android:layout_width="match_parent"
+       android:layout_height="?attr/actionBarSize"
+       android:theme="@style/Theme.Material3.DayNight">
+
+   </androidx.appcompat.widget.Toolbar>
+
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/rvMain"
