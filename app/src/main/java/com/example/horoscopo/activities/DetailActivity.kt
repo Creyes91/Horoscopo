@@ -2,11 +2,16 @@ package com.example.horoscopo.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import com.example.horoscopo.R
 import com.example.horoscopo.data.Horoscope
 import com.example.horoscopo.data.HoroscopeProvider
 
 class DetailActivity : AppCompatActivity() {
+
+    private var fav= true
 
     lateinit var horoscope: Horoscope
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,10 +26,31 @@ class DetailActivity : AppCompatActivity() {
 
         horoscope = HoroscopeProvider.findByID(id)
 
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        setFavIcon(menu?.findItem(R.id.favBtn)!!)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    private fun setFavIcon(menuItem: MenuItem) {
+        val id= if (fav) R.drawable.ic_fav;
+        else R.drawable.ic_fav_border;
 
+        menuItem.icon= ContextCompat.getDrawable(this, id)
 
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId)
+        {
+            R.id.favBtn-> {
+                fav = !fav
+                setFavIcon(item)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

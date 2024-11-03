@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -49,6 +50,7 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
     var nameTextView: TextView = view.findViewById(R.id.nameTV)
     var datesTextView: TextView = view.findViewById(R.id.dateTV)
     var symbolImageView: ImageView = view.findViewById(R.id.iconIV)
+    var favBtn: Button = view.findViewById(R.id.favBtn)
 
     //prueba expandir cardview
     /*var detailTxt: TextView = view.findViewById(R.id.detailTxt)
@@ -60,6 +62,10 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
         //val context = itemView.context
         //nameTextView.text = context.getString(horoscope.name)
         //symbolImageView.setImageDrawable(context.getDrawable(horoscope.image))
+
+        /* if isFav == true
+        pner el corazon en fav
+         */
 
         nameTextView.setText(horoscope.name)
         datesTextView.setText(horoscope.date)
