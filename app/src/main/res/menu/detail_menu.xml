@@ -6,8 +6,9 @@
 
     <item
         android:id="@+id/favBtn"
-        android:title="@string/action_search"
+        android:title="@string/action_fav"
         android:icon="@drawable/ic_fav"
+        android:iconTint="@color/fav_color"
         app:showAsAction="always">
 
     </item>

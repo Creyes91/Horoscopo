@@ -63,9 +63,8 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
         //nameTextView.text = context.getString(horoscope.name)
         //symbolImageView.setImageDrawable(context.getDrawable(horoscope.image))
 
-        /* if isFav == true
-        pner el corazon en fav
-         */
+
+
 
         nameTextView.setText(horoscope.name)
         datesTextView.setText(horoscope.date)
@@ -73,7 +72,6 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
        // detailTxt.setText("prueba")
 
     }
-
 
 
 
