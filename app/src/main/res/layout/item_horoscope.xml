@@ -25,17 +25,19 @@
             android:layout_gravity="center"
             android:animateLayoutChanges="true">
 
-            <Button
+            <ImageView
                 android:id="@+id/favBtn"
-                style="?attr/materialIconButtonStyle"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_fav"
+                android:src="@drawable/ic_fav"
+
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone">
+                android:visibility="visible">
 
-            </Button>
+            </ImageView>
 
 
             <ImageView

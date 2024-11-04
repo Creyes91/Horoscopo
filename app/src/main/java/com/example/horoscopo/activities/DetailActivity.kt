@@ -8,12 +8,14 @@ import androidx.core.content.ContextCompat
 import com.example.horoscopo.R
 import com.example.horoscopo.data.Horoscope
 import com.example.horoscopo.data.HoroscopeProvider
+import com.example.horoscopo.utils.SessionManager
 
 class DetailActivity : AppCompatActivity() {
 
-    private var fav= true
+    private var fav= false
 
     lateinit var horoscope: Horoscope
+    lateinit var Session: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
