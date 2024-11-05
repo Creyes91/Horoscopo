@@ -10,10 +10,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/expandableCV"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"
-        android:layout_margin="20dp">
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout"
@@ -26,16 +27,13 @@
             android:animateLayoutChanges="true">
 
             <ImageView
-                android:id="@+id/favBtn"
-
+                android:id="@+id/favImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fav"
-
-                app:layout_constraintHorizontal_weight="1"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="visible">
+                app:layout_constraintTop_toTopOf="parent">
 
             </ImageView>
 

@@ -16,6 +16,7 @@ class ListActivity : AppCompatActivity() {
 
     lateinit var horoscopeList: List<Horoscope>
     lateinit var recyclerView: RecyclerView
+    lateinit var adapter: HoroscopeAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
@@ -23,7 +24,7 @@ class ListActivity : AppCompatActivity() {
         recyclerView=findViewById(R.id.rvMain) // creacion de RV
 
         horoscopeList=HoroscopeProvider.findAll() //creacion asignacion de lista
-        val adapter = HoroscopeAdapter(horoscopeList) { position ->
+        adapter = HoroscopeAdapter(horoscopeList) { position ->
             //aqui poner que hace cuaando detecta un click
             val horoscope = horoscopeList[position]
             navigateToDetail(horoscope)
@@ -44,7 +45,17 @@ class ListActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.list_menu, menu)
+        val itemSearch = menu?.findItem(R.id.itemSearch)!!
+
+
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        //notificar al adapter que a cambiado para refrescar la lista
+        adapter.notifyDataSetChanged() //asi refresca la vista
     }
 
 

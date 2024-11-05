@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo.R
 import com.example.horoscopo.data.Horoscope
+import com.example.horoscopo.utils.SessionManager
 
 class HoroscopeAdapter(val items: List<Horoscope>, val onItemClick:(Int) -> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>()
 {
@@ -50,7 +51,7 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
     var nameTextView: TextView = view.findViewById(R.id.nameTV)
     var datesTextView: TextView = view.findViewById(R.id.dateTV)
     var symbolImageView: ImageView = view.findViewById(R.id.iconIV)
-    var favBtn: Button = view.findViewById(R.id.favBtn)
+    var favImg: ImageView= view.findViewById(R.id.favImg)
 
     //prueba expandir cardview
     /*var detailTxt: TextView = view.findViewById(R.id.detailTxt)
@@ -70,6 +71,11 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
         datesTextView.setText(horoscope.date)
         symbolImageView.setImageResource(horoscope.image)
        // detailTxt.setText("prueba")
+
+        if(SessionManager(itemView.context).isFavorite(horoscope.id))
+            favImg.visibility= View.VISIBLE
+        else
+            favImg.visibility= View.GONE
 
     }
 

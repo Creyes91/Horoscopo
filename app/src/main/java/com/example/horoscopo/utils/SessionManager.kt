@@ -21,7 +21,7 @@ class SessionManager(private val context: Context) {
 
     fun isFavorite(horoscopeID: String): Boolean
     {
-        return horoscopeID== getFavorite()
+        return horoscopeID == getFavorite()
 
     }
 }
