@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo.R
@@ -35,7 +37,7 @@ class ListActivity : AppCompatActivity() {
         recyclerView.layoutManager= LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false) // manejo del RV en vertical
 
 
-       // recyclerView.layoutManager= GridLayoutManager(this,2) //RV en columnas
+        //recyclerView.layoutManager= GridLayoutManager(this,2) //RV en columnas
 
 
 
@@ -47,9 +49,32 @@ class ListActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.list_menu, menu)
         val itemSearch = menu?.findItem(R.id.itemSearch)!!
 
+        val searchView = itemSearch.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener // hacemos la clase directamente, "lambda", en el constructor
+        {
+            override fun onQueryTextSubmit(query: String?): Boolean { // se sobreeescribe
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean { // se sobreescribe la funcion
+                horoscopeList = HoroscopeProvider.findAll().filter {
+                    getString(it.name).contains(newText, true) ||
+                    getString(it.date).contains(newText, true)
+                }
+                adapter.updateItems(horoscopeList)
+                return true
+            }
+
+
+        }
+        )
+
+
 
         return super.onCreateOptionsMenu(menu)
     }
+
 
     override fun onResume() {
         super.onResume()

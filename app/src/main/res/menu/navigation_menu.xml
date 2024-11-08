@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_today"
+        android:enabled="true"
+        android:icon="@drawable/icon_today"
+        android:title="@string/menu_today"/>
+    <item
+        android:id="@+id/item_thisWeek"
+        android:enabled="true"
+        android:icon="@drawable/icon_weekly"
+        android:title="@string/menu_weekly"/>
+    <item
+        android:id="@+id/item_thisMonth"
+        android:enabled="true"
+        android:icon="@drawable/icon_monthly"
+        android:title="@string/menu_monthly"/>
+
+
+</menu>

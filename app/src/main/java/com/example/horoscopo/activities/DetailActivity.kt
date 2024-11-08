@@ -1,19 +1,34 @@
 package com.example.horoscopo.activities
 
 import android.annotation.SuppressLint
+import android.app.TaskStackBuilder
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
+import android.view.View
+
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.horoscopo.R
 import com.example.horoscopo.data.Horoscope
 import com.example.horoscopo.data.HoroscopeProvider
 import com.example.horoscopo.utils.SessionManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.lang.StringBuilder
+import java.net.URL
+import javax.net.ssl.HttpsURLConnection
 
 class DetailActivity : AppCompatActivity() {
 
@@ -21,7 +36,13 @@ class DetailActivity : AppCompatActivity() {
 
     lateinit var horoscope: Horoscope
     lateinit var Session: SessionManager
-    lateinit var txt: String
+    lateinit var lucky_TextView: TextView
+    lateinit var date_lucky_TextView: TextView
+    lateinit var lucky_ProgressBar: ProgressBar
+    private var time= "monthly"
+    lateinit var navigateBarView: BottomNavigationView
+
+
 
 
 
@@ -42,16 +63,48 @@ class DetailActivity : AppCompatActivity() {
 
         isFav = Session.isFavorite(horoscope.id)
 
-      //  imageSigno= findViewById(R.id.detailImageView)
+      // imageSigno= findViewById(R.id.detailImageView)
         findViewById<ImageView>(R.id.detailImageView).setImageResource(horoscope.image)
+        lucky_TextView = findViewById(R.id.textDetail)
+        date_lucky_TextView= findViewById(R.id.date_TextView)
+        lucky_ProgressBar= findViewById(R.id.lucky_PB)
+        navigateBarView = findViewById(R.id.navView)
 
-        txt = findViewById<TextView>(R.id.textDetail).text.toString()
+        navigateBarView.selectedItemId= R.id.item_today
+
+        navigateBarView.setOnItemSelectedListener {
+            when (it.itemId)
+            {
+                R.id.item_today->{
+                    time= "daily"
+
+                }
+                R.id.item_thisWeek->{
+                    time= "weekly"
+
+                }
+                R.id.item_thisMonth->{
+                    time= "montly"
+
+                }
+
+            }
+            return@setOnItemSelectedListener true
+
+
+        }
+
+
+        getHoroscopeLuck(time)
+
+
 
 
 
 
 
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.detail_menu, menu)
@@ -83,7 +136,7 @@ class DetailActivity : AppCompatActivity() {
             {
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, txt)
+                    putExtra(Intent.EXTRA_TEXT, getString(horoscope.name) + date_lucky_TextView.text.toString()+ lucky_TextView.text.toString())
                     type = "text/plain"
 
                 }
@@ -95,4 +148,62 @@ class DetailActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
+    private fun shareLuck(){
+        val sendIntent = Intent()
+        sendIntent.action= Intent.ACTION_SEND
+        sendIntent.putExtra(Intent.EXTRA_TEXT, getString(horoscope.name) + date_lucky_TextView.text.toString()+ lucky_TextView.text.toString())
+        sendIntent.type = "text/plain"
+    }
+    fun getHoroscopeLuck(time:String)
+    {
+        var result = "Inicializacion"
+        var date = ""
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val url =
+                URL("https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${time}?sign=${horoscope.id}&day=TODAY")
+            val con = url.openConnection() as HttpsURLConnection
+
+            try {
+                con.requestMethod = "GET"
+                val responseCode = con.responseCode
+                if (responseCode == HttpsURLConnection.HTTP_OK) // revisa que la conexion se establezca y de el codigo correspondiente
+                {
+                    val jsonResponse = readStream(con.inputStream).toString()
+                    result = JSONObject(jsonResponse).getJSONObject("data")
+                        .getString("horoscope_data") //llama a un objeto Json y dentro de este accede a los valores
+                    date = JSONObject(jsonResponse).getJSONObject("data").getString("date")
+                } else {
+                    result = "hubo un error"
+                }
+            } catch (e : Exception)
+            {
+                date= "error en la conexion"
+            }
+            CoroutineScope(Dispatchers.Main).launch {
+                lucky_TextView.text = result
+                date_lucky_TextView.text= date
+                lucky_ProgressBar.visibility = View.GONE
+                lucky_TextView.visibility = View.VISIBLE
+            }
+        }
+
+
+
+    }
+
+    private fun readStream(inputStream: InputStream): StringBuilder {
+
+        val reader = BufferedReader(InputStreamReader(inputStream))
+        val response = StringBuilder()
+        var line: String?
+        while (reader.readLine().also { line = it } != null){
+            response.append(line)
+        }
+        reader.close()
+        return response
+    }
+
+
 }

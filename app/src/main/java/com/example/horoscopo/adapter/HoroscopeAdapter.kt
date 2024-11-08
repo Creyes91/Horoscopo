@@ -15,7 +15,7 @@ import com.example.horoscopo.R
 import com.example.horoscopo.data.Horoscope
 import com.example.horoscopo.utils.SessionManager
 
-class HoroscopeAdapter(val items: List<Horoscope>, val onItemClick:(Int) -> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>()
+class HoroscopeAdapter(var items: List<Horoscope>, val onItemClick:(Int) -> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>()
 {
 
 
@@ -43,6 +43,12 @@ class HoroscopeAdapter(val items: List<Horoscope>, val onItemClick:(Int) -> Unit
 
     }
 
+    fun updateItems(items: List<Horoscope>) {
+        this.items=items
+        notifyDataSetChanged()
+
+    }
+
 }
 
 class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -54,10 +60,10 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
     var favImg: ImageView= view.findViewById(R.id.favImg)
 
     //prueba expandir cardview
-    /*var detailTxt: TextView = view.findViewById(R.id.detailTxt)
-    var expandable: CardView= view.findViewById(R.id.expandableCV)
+  /*  var detailTxt: TextView = view.findViewById(R.id.detailTxt)
+    var expandable: CardView= view.findViewById(R.id.expandableCV)*/
 
-    var layout: LinearLayout= view.findViewById(R.id.layout)*/
+  //  var layout: LinearLayout= view.findViewById(R.id.layout)
 
     fun render(horoscope: Horoscope) {
         //val context = itemView.context

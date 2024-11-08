@@ -30,5 +30,8 @@
     <string name="action_share">Share</string>
     <string name="action_fav">Favorite</string>
 
+    <string name="menu_today"> Daily</string>
+    <string name="menu_weekly"> Weekly</string>
+    <string name="menu_monthly"> Monthly</string>
 
 </resources>

@@ -14,7 +14,7 @@
         android:layout_marginVertical="20dp"
         app:cardCornerRadius="16dp">
 
-       <LinearLayout
+       <androidx.constraintlayout.widget.ConstraintLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="vertical"
@@ -24,28 +24,88 @@
               android:id="@+id/detailImageView"
               android:layout_width="wrap_content"
               android:layout_height="0dp"
-              android:layout_weight="1"
               android:layout_marginVertical="50dp"
-              android:src="@drawable/capricornus_icon">
+              tools:src="@drawable/capricornus_icon"
+              app:layout_constraintVertical_weight="1"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toTopOf="@id/date_TextView"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent">
 
 
           </ImageView>
 
            <TextView
-               android:id="@+id/textDetail"
-               android:layout_width="match_parent"
-               android:layout_height="0dp"
-               android:layout_weight="3"
-               android:layout_marginHorizontal="10dp"
-               android:text="Entre en las medidas, ayudas a la vivienda, ayuntamientos y líneas de crédito para las empresas. Durante su intervención, ha apelado a la catástrofe para sacar adelante los Presupuestos Generales del Estado">
+               android:id="@+id/date_TextView"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               android:paddingVertical="10dp"
+               android:textStyle="bold"
+               android:textAllCaps="true"
+               app:layout_constraintTop_toBottomOf="@id/detailImageView"
+               app:layout_constraintBottom_toTopOf="@id/scroll_DetailView"
+               tools:text="fecha del horoscopo">
 
 
            </TextView>
 
+            <ProgressBar
+                android:id="@+id/lucky_PB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style=" ?android:attr/progressBarStyleLarge"
+                app:layout_constraintTop_toBottomOf="@id/date_TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            </ProgressBar>
+
+           <ScrollView
+               android:id="@+id/scroll_DetailView"
+               android:layout_width="wrap_content"
+               android:layout_height="0dp"
+               app:layout_constraintVertical_weight="3"
+               app:layout_constraintTop_toBottomOf="@id/date_TextView"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintBottom_toTopOf="@+id/navView"
+
+
+               >
+
+               <TextView
+                   android:id="@+id/textDetail"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:visibility="gone"
+                   android:layout_marginHorizontal="15dp"
+                   android:layout_marginBottom="20dp"
+                   tools:text="Entre en las medidas, ayudas a la vivienda, ayuntamientos y líneas de crédito para las empresas. Durante su intervención, ha apelado a la catástrofe para sacar adelante los Presupuestos Generales del Estado">
+
+
+               </TextView>
+
+           </ScrollView>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/navView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/navigation_menu"
+                app:layout_constraintTop_toBottomOf="@id/scroll_DetailView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 
-       </LinearLayout>
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
