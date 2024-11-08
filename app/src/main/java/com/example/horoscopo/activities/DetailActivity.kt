@@ -84,11 +84,13 @@ class DetailActivity : AppCompatActivity() {
 
                 }
                 R.id.item_thisMonth->{
-                    time= "montly"
+                    time= "monthly"
 
                 }
 
             }
+
+            getHoroscopeLuck(time)
             return@setOnItemSelectedListener true
 
 
